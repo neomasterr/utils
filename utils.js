@@ -87,4 +87,48 @@ export const getTransitionDuration = ($el, name) => {
     }
 
     return 0;
-},
+}
+
+/**
+ * Рекурсивное слияние объектов
+ * @param  {Object} target Целевой объект
+ * @param  {Object} object Объект - донор
+ * @return {Object}
+ *
+ * @see https://www.npmjs.com/package/merge-deep
+ */
+export const merge = (target, object) => {
+    const isObject = (obj) => typeof obj == 'object' && obj !== null && !Array.isArray(obj);
+    const hasOwn = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key);
+    const isValidKey = (key) => key !== '__proto__' && key !== 'constructor' && key !== 'prototype';
+
+    if (!isObject(target)) {
+        target = {};
+    }
+
+    const _merge = (target, obj) => {
+        for (let key in obj) {
+            if (!isValidKey(key) || !hasOwn(obj, key)) {
+                continue;
+            }
+
+            if (isObject(target[key]) && isObject(obj[key])) {
+                target[key] = _merge(target[key], obj[key]);
+            } else if (Array.isArray(target[key]) && Array.isArray(obj[key])) {
+                target[key] = [].concat(target[key], obj[key]);
+            } else {
+                target[key] = obj[key];
+            }
+        }
+
+        return target;
+    }
+
+    for (let i = 1; i < arguments.length; ++i) {
+        if (isObject(arguments[i]) || Array.isArray(arguments[i])) {
+            _merge(target, arguments[i]);
+        }
+    }
+
+    return target;
+}
