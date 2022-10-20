@@ -1,0 +1,24 @@
+{
+  "name": "@neomasterr/utils",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "utils.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neomasterr/utils.git"
+  },
+  "keywords": [
+    "js",
+    "utils"
+  ],
+  "author": "neomasterr",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neomasterr/utils/issues"
+  },
+  "homepage": "https://github.com/neomasterr/utils#readme"
+}
